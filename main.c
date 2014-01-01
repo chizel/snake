@@ -38,20 +38,32 @@ int main(int argc, char *argv[])
         switch(ch)
         {
             case KEY_UP:
-                move_snake(&snake, UP);
-                print_snake(&snake);
+                if(snake.where_to_move != DOWN)
+                {
+                    move_snake(&snake, UP);
+                    print_snake(&snake);
+                }
                 break;
             case KEY_DOWN:
-                move_snake(&snake, DOWN);
-                print_snake(&snake);
+                if(snake.where_to_move != UP)
+                {
+                    move_snake(&snake, DOWN);
+                    print_snake(&snake);
+                }
                 break;
             case KEY_LEFT:
-                move_snake(&snake, LEFT);
-                print_snake(&snake);
+                if(snake.where_to_move != RIGHT)
+                {
+                    move_snake(&snake, LEFT);
+                    print_snake(&snake);
+                }
                 break;
             case KEY_RIGHT:
-                move_snake(&snake, RIGHT);
-                print_snake(&snake);
+                if(snake.where_to_move != LEFT)
+                {
+                    move_snake(&snake, RIGHT);
+                    print_snake(&snake);
+                }
                 break;
             case ' ':
                 sleep(10);
