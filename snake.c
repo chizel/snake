@@ -19,8 +19,6 @@ int init_snake(game_snake *snake)
     snake->item[1].y = 1;
     snake->item[2].x = 3;
     snake->item[2].y = 1;
-    snake->item[3].x = 4;
-    snake->item[3].y = 1;
     return 0;
 }
 
@@ -255,23 +253,6 @@ int add_item(game_snake *snake)
     };
 
     print_snake(snake);
-    return 0;
-}
-
-int show_elements(game_snake *snake)
-{
-    uint8_t i;
-
-    for(i = 0; i <= snake->head ; i++)
-    {
-        move(snake->item[i].y, snake->item[i].x);
-        addch('*');
-        move(i + 5, 0);
-        printw("i: %d; y: %d, x: %d", i, snake->item[i].y, snake->item[i].x);
-    }
-
-    refresh();
-    sleep(4);
     return 0;
 }
 
