@@ -49,7 +49,7 @@ int draw_borders(game_snake *snake)
             if(field[i][j])
             {
                 move(i,j);
-                addch(ACS_DEGREE);
+                addch(ACS_BLOCK);
             }
         }
     }
@@ -274,9 +274,8 @@ int add_item(game_snake *snake)
 
 int generate_field()
 {
-    uint8_t i, j, y, x, count_of_objects;
+    uint8_t i, j, y, x;
     //field 1 to BOARD_SIZE_Y, 1 to BOARD_SIZE_X
-    count_of_objects = 10;
     srand(time(NULL));
 
     for(i = 0; i <= BOARD_SIZE_Y; i++)
@@ -287,7 +286,7 @@ int generate_field()
         }
     }
 
-    for(i = 0; i < count_of_objects; i++)
+    for(i = 0; i < COUNT_OF_OBJECTS; i++)
     {
         x = rand() % BOARD_SIZE_X + 1;
         y = rand() % BOARD_SIZE_Y + 1;

@@ -1,11 +1,12 @@
 #ifndef SNAKE_H
 #define SNAKE_H
-#define BOARD_SIZE_X 10
-#define BOARD_SIZE_Y 10
+#define BOARD_SIZE_X 20
+#define BOARD_SIZE_Y 20
 #define UP    1
 #define LEFT  2
 #define DOWN  3
 #define RIGHT 4
+#define COUNT_OF_OBJECTS 20
 
 typedef struct
 {
