@@ -25,6 +25,7 @@ int main(int argc, char *argv[])
     ch = getch();
     clear();
 
+    generate_field();
     print_snake(&snake);
     draw_borders(&snake);
     refresh();

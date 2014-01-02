@@ -24,7 +24,7 @@ int init_snake(game_snake *snake)
 
 int draw_borders(game_snake *snake)
 {
-    uint8_t i;
+    uint8_t i, j;
 
     for(i = 0; i <= BOARD_SIZE_X + 1; i++)
     {
@@ -40,6 +40,18 @@ int draw_borders(game_snake *snake)
         addch(ACS_CKBOARD);
         move(i, BOARD_SIZE_X + 1);
         addch(ACS_CKBOARD);
+    }
+
+    for(i = 1; i < BOARD_SIZE_Y; i++)
+    {
+        for(j = 1; j < BOARD_SIZE_Y; j++)
+        {
+            if(field[i][j])
+            {
+                move(i,j);
+                addch(ACS_DEGREE);
+            }
+        }
     }
 
     return 0;
@@ -183,19 +195,23 @@ int print_snake(game_snake *snake)
 int check_snake(game_snake *snake)
 {
     //is snake try to go to filled element
-    uint8_t i;
+    uint8_t i, x, y;
 
     for( i = 0; i < snake->head; i++)
     {
-        if( (snake->item[i].x == snake->item[snake->head].x) && (snake->item[i].y == snake->item[snake->head].y) )
+        if( (snake->item[i].x == snake->item[snake->head].x)
+                && (snake->item[i].y == snake->item[snake->head].y) )
         {
-            move(3,3);
-            printw("YOU LOSE!");
-            refresh();
-            sleep(4);
-            endwin();
-            exit(0);
+            game_over();
         }
+    }
+
+    x = snake->item[snake->head].x;
+    y = snake->item[snake->head].y;
+
+    if(field[y][x])
+    {
+        game_over();
     }
 
     return 0;
@@ -256,7 +272,42 @@ int add_item(game_snake *snake)
     return 0;
 }
 
-/*int generate_field()*/
-/*{*/
-    /*field[0][0];*/
-/*}*/
+int generate_field()
+{
+    uint8_t i, j, y, x, count_of_objects;
+    //field 1 to BOARD_SIZE_Y, 1 to BOARD_SIZE_X
+    count_of_objects = 10;
+    srand(time(NULL));
+
+    for(i = 0; i <= BOARD_SIZE_Y; i++)
+    {
+        for(j = 0; j <= BOARD_SIZE_X; j++)
+        {
+            field[i][j] = 0;
+        }
+    }
+
+    for(i = 0; i < count_of_objects; i++)
+    {
+        x = rand() % BOARD_SIZE_X + 1;
+        y = rand() % BOARD_SIZE_Y + 1;
+        field[y][x] = 1;
+    }
+
+    for(x = 1; x <= 4; x++)
+    {
+        field[1][x] = 0;
+    }
+
+    return 0;
+}
+
+int game_over()
+{
+    move(3,3);
+    printw("YOU LOSE!");
+    refresh();
+    sleep(4);
+    endwin();
+    exit(0);
+}
