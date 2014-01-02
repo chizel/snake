@@ -1,0 +1,5 @@
+Need:
+ncurses
+
+Compilling:
+gcc snake.c main.c -lncurses -o game 
