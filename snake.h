@@ -29,7 +29,6 @@ int move_up(game_snake *);
 int move_down(game_snake *);
 int move_left(game_snake *);
 int move_right(game_snake *);
-int reverse_snake(game_snake *);
 int show_elements(game_snake *);
 int add_item(game_snake *);
 int check_snake(game_snake *);

@@ -10,7 +10,7 @@ extern uint8_t field[BOARD_SIZE_Y + 1][BOARD_SIZE_X + 1];
 
 int init_snake(game_snake *snake)
 {
-    snake->size = 4;
+    snake->size = 3;
     snake->head = snake->size - 1;
     snake->where_to_move = RIGHT;
     snake->item[0].x = 1;
@@ -55,50 +55,16 @@ int move_snake(game_snake *snake, int where)
     switch(where)
     {
         case UP:
-            if( (snake->item[0].x == snake->item[1].x) && (snake->where_to_move == DOWN) )
-            {
-                //head and second element of snake are in the same line
-                //move snake to the other side
-                reverse_snake(snake);
-                move_up(snake);
-            }
-            else
-            {
-                move_up(snake);
-            }
+            move_up(snake);
             break;
         case LEFT:
-            if( (snake->item[0].y == snake->item[1].y) && (snake->where_to_move == RIGHT) )
-            {
-                reverse_snake(snake);
-                move_left(snake);
-            }
-            else
-            {
-                move_left(snake);
-            }
+            move_left(snake);
             break;
         case DOWN:
-            if( (snake->item[0].x == snake->item[1].x) && (snake->where_to_move == UP) )
-            {
-                reverse_snake(snake);
-                move_down(snake);
-            }
-            else
-            {
-                move_down(snake);
-            }
+            move_down(snake);
             break;
         case RIGHT:
-            if( (snake->item[snake->head].y == snake->item[snake->head - 1].y) && (snake->where_to_move == LEFT) )
-            {
-                reverse_snake(snake);
-                move_right(snake);
-            }
-            else
-            {
-                move_right(snake);
-            }
+            move_right(snake);
             break;
         default:
             ;
@@ -215,21 +181,6 @@ int print_snake(game_snake *snake)
     usleep(500000);
     return 0;
 }
-
-int reverse_snake(game_snake *snake)
-{
-    snake_item tmp;
-    uint8_t i;
-
-    for(i = 0; i < snake->size / 2; i++)
-    {
-        tmp = snake->item[i];
-        snake->item[i] = snake->item[snake->head - i];
-        snake->item[snake->head - i] = tmp;
-    }
-
-    return 0;
-}    
 
 int check_snake(game_snake *snake)
 {
